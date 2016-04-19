@@ -23,6 +23,10 @@ class ContainerViewController: UIViewController {
         button.setTitle("Title", forState: .Highlighted)
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.view.superview!.layer.cornerRadius = 0;
+    }
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil,bundle: nibBundleOrNil)
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     var arr:[String] = ["test1","test2","test3","test4","test5","test6"];
@@ -43,6 +43,35 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBAction func btnTap(sender: UIButton) {
         sender.backgroundColor = UIColor.init(red: 51/255, green: 51/255, blue: 51/255, alpha: 0.5)
     }
+    
+    @IBAction func btnPopTap(sender: UIButton) {
+        let menuViewController =  ContainerViewController()
+        menuViewController.modalPresentationStyle = .Popover
+        menuViewController.preferredContentSize = CGSizeMake(100, 100)
+        
+        
+        
+        let popoverMenuViewController = menuViewController.popoverPresentationController
+//        popoverMenuViewController?.ba
+        popoverMenuViewController?.permittedArrowDirections = UIPopoverArrowDirection.init(rawValue: 0)
+        popoverMenuViewController?.delegate = self
+        popoverMenuViewController?.sourceView = self.view
+        
+        popoverMenuViewController?.sourceRect = CGRect(
+            x: 300,
+            y: 300,
+            width: 1,
+            height: 1)
+        presentViewController(
+            menuViewController,
+            animated: true,
+            completion: nil)
+    }
+    func adaptivePresentationStyleForPresentationController(
+        controller: UIPresentationController) -> UIModalPresentationStyle {
+            return .None
+    }
+
     
 }
 
