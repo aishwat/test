@@ -46,3 +46,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
 }
 
+class MyCustomTableView: UITableView {
+    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+        for cell in self.visibleCells {
+            if let cell = cell as? customCell {
+                let buttonFrame = self.convertRect(cell.button.frame, fromView: cell.button.superview)
+                if CGRectContainsPoint(buttonFrame, point) {
+                    return cell.button
+                }
+            }
+            
+        }
+        return super.hitTest(point, withEvent: event)
+    }
+}
+
